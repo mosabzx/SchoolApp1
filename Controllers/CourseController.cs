@@ -57,7 +57,8 @@ namespace SchoolApp.Controllers
         {
             try
             {
-                Obcourse.Add(course);
+                db.Courses.Add(course);
+                Commit();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -79,7 +80,8 @@ namespace SchoolApp.Controllers
         {
             try
             {
-                Obcourse.Update(newCourse);
+                db.Courses.Update(newCourse);
+                Commit();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -97,17 +99,24 @@ namespace SchoolApp.Controllers
         // POST: CourseController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id,Course Obcourse)
+        public ActionResult Delete(Course Obcourse)
         {
             try
             {
-                Obcourse.Delete(id);
+                db.Courses.Remove(Obcourse);
+                Commit();
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return View();
             }
+        }
+
+
+        public void Commit()
+        {
+            db.SaveChanges();
         }
     }
 }

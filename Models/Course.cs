@@ -20,60 +20,7 @@ namespace SchoolApp.Models
 
         
 
-        SchoolDb db;
        
-        public Course(SchoolDb _db)
-        {
-            db = _db;
-            
-
-
-        }
-
-        
-
-
-        //public IList<Course> List()
-        //{
-            
-        //    return ;
-        //}
-
-        public Course Find(int id)
-        {
-            var course = db.Courses.Find(id);
-            return course;
-        }
-
-        public void Add(Course course)
-        {
-            db.Courses.Add(course);
-            Commit();
-        }
-
-        public void Delete(int id)
-        {
-            var course = Find(id);
-            db.Courses.Remove(course);
-            Commit();
-        }
-
-        
-
-        public void Update(Course newCourse) 
-        {
-            db.Update(newCourse);
-            Commit();
-        }
-
-
-
-        public void Commit()
-        {
-            db.SaveChanges();
-        }
-
-
 
     }
 
