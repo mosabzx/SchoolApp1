@@ -90,10 +90,11 @@ namespace SchoolApp.Controllers
         // POST: StudentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Student student)
+        public ActionResult Delete( int id,Student student)
         {
             try
             {
+               
                 db.Students.Remove(student);
                 Commit();
                 return RedirectToAction(nameof(Index));
