@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SchoolApp.Data;
 using SchoolApp.Models;
 using System;
@@ -10,51 +9,46 @@ using System.Threading.Tasks;
 
 namespace SchoolApp.Controllers
 {
-    public class CourseController : Controller
+    public class StudentController : Controller
     {
-       private readonly SchoolDb db;
-        public Course Obcourse;
-        public CourseController(SchoolDb _db,Course Obcourse)
+
+        SchoolDb db;
+
+        public StudentController(SchoolDb _db)
         {
             db = _db;
-            this.Obcourse = Obcourse;
-
         }
 
-        
-        
 
-        // GET: CourseController
+        // GET: StudentController
         public ActionResult Index()
         {
-
-            var courses = db.Courses.ToList();
-            return View(courses);
+            var students = db.Students.ToList();
+            return View(students);
         }
 
-
-        // GET: CourseController/Details/5
+        // GET: StudentController/Details/5
         public ActionResult Details(int id)
         {
-            var course = db.Courses.Find(id);
-            return View(course);
+            var student = db.Students.Find(id);
+            return View(student);
         }
 
-
-        // GET: CourseController/Create
+        // GET: StudentController/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
-        // POST: CourseController/Create
+        // POST: StudentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Course course)
+        public ActionResult Create(Student student)
         {
             try
             {
-                db.Courses.Add(course);
+                db.Students.Add(student);
                 Commit();
                 return RedirectToAction(nameof(Index));
             }
@@ -64,20 +58,20 @@ namespace SchoolApp.Controllers
             }
         }
 
-        // GET: CourseController/Edit/5
+        // GET: StudentController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: CourseController/Edit/5
+        // POST: StudentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Course newCourse)
+        public ActionResult Edit(Student student)
         {
             try
             {
-                db.Courses.Update(newCourse);
+                db.Students.Update(student);
                 Commit();
                 return RedirectToAction(nameof(Index));
             }
@@ -87,20 +81,20 @@ namespace SchoolApp.Controllers
             }
         }
 
-        // GET: CourseController/Delete/5
+        // GET: StudentController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: CourseController/Delete/5
+        // POST: StudentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Course Obcourse)
+        public ActionResult Delete(Student student)
         {
             try
             {
-                db.Courses.Remove(Obcourse);
+                db.Students.Remove(student);
                 Commit();
                 return RedirectToAction(nameof(Index));
             }
@@ -110,10 +104,13 @@ namespace SchoolApp.Controllers
             }
         }
 
-
         public void Commit()
         {
             db.SaveChanges();
         }
+
+
+
+
     }
 }

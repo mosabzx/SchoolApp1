@@ -1,23 +1,20 @@
-﻿@model IEnumerable<SchoolApp.Models.Course>
+﻿@model IEnumerable<SchoolApp.Models.Student>
 
 @{
-    ViewData["Title"] = "Course";
+    ViewData["Title"] = "students";
 }
 
-<h1>Courses</h1>
+<h1>Students</h1>
 
 <p>
-    <a asp-action="Create">Add new course</a>
+    <a asp-action="Create">Add New Students</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Material)
+                @Html.DisplayNameFor(model => model.FullName)
             </th>
-            
-            
-            
             <th></th>
         </tr>
     </thead>
@@ -25,7 +22,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Material)
+                @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
