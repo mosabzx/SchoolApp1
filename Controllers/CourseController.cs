@@ -11,7 +11,7 @@ namespace SchoolApp.Controllers
 {
     public class CourseController : Controller
     {
-        SchoolDb db;
+       private readonly SchoolDb db;
         public Course Obcourse;
         public CourseController(SchoolDb _db,Course Obcourse)
         {
@@ -30,9 +30,9 @@ namespace SchoolApp.Controllers
         // GET: CourseController
         public ActionResult Index()
         {
-            Obcourse.List();
-            //var courses = db.Courses;
-            return View();
+
+            var courses = db.Courses;
+            return View(courses);
         }
 
 
@@ -57,7 +57,7 @@ namespace SchoolApp.Controllers
         {
             try
             {
-                course.Add(course);
+                Obcourse.Add(course);
                 return RedirectToAction(nameof(Index));
             }
             catch

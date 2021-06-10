@@ -1,5 +1,6 @@
 ﻿using SchoolApp.Data;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SchoolApp.Models
 {
@@ -8,6 +9,7 @@ namespace SchoolApp.Models
         
 
         public int Id { get; set; }
+        [Required]
         public string Material { get; set; }
 
         public IList<StudentCourse> StudentCourses { get; set; }
@@ -24,16 +26,18 @@ namespace SchoolApp.Models
         {
             db = _db;
             
+
+
         }
 
+        
 
 
-
-        public IList<Course> List()
-        {
-
-            return (IList<Course>)db.Courses;
-        }
+        //public IList<Course> List()
+        //{
+            
+        //    return ;
+        //}
 
         public Course Find(int id)
         {
