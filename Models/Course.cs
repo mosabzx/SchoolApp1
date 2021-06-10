@@ -17,14 +17,19 @@ namespace SchoolApp.Models
 
 
         
+
         SchoolDb db;
+       
         public Course(SchoolDb _db)
         {
             db = _db;
+            
         }
 
 
-        IList<Course> List()
+
+
+        public IList<Course> List()
         {
 
             return (IList<Course>)db.Courses;
