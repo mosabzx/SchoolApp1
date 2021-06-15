@@ -12,11 +12,12 @@ namespace SchoolApp.Controllers
     public class TeacherController : Controller
     {
         SchoolDb db;
+        Teacher teacher;
         
-        public TeacherController(SchoolDb _db)
+        public TeacherController(SchoolDb _db,Teacher _teacher)
         {
             db = _db;
-            
+            teacher = _teacher;
         }
 
 
@@ -45,6 +46,7 @@ namespace SchoolApp.Controllers
             };
 
             return View(model);
+            //return View();
         }
 
         // POST: TeacherController/Create
@@ -97,7 +99,7 @@ namespace SchoolApp.Controllers
         // POST: TeacherController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Teacher teacher)
+        public ActionResult Delete(Teacher teacher)
         {
             try
             {
