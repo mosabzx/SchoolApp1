@@ -11,7 +11,8 @@ namespace SchoolApp.Models
         public int Id { get; set; }
         
         public string Material { get; set; }
-        public Teacher Teacher { get; set; }
+       
+        public Teacher Teachers { get; set; }
 
         public IList<StudentCourse> StudentCourses { get; set; }
 

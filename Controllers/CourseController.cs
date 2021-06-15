@@ -27,8 +27,8 @@ namespace SchoolApp.Controllers
         // GET: CourseController
         public ActionResult Index()
         {
-
-            var courses = db.Courses.ToList();
+            
+            var courses = db.Courses.Include(t => t.Teachers).ToList();
             return View(courses);
         }
 

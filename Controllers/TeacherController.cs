@@ -12,9 +12,11 @@ namespace SchoolApp.Controllers
     public class TeacherController : Controller
     {
         SchoolDb db;
+        
         public TeacherController(SchoolDb _db)
         {
             db = _db;
+            
         }
 
 
@@ -36,7 +38,13 @@ namespace SchoolApp.Controllers
         // GET: TeacherController/Create
         public ActionResult Create()
         {
-            return View();
+
+            var model = new Teacher
+            {
+                Courses = db.Courses.ToList()
+            };
+
+            return View(model);
         }
 
         // POST: TeacherController/Create
@@ -46,6 +54,7 @@ namespace SchoolApp.Controllers
         {
             try
             {
+                 
                 db.Teachers.Add(teacher);
                 Commit();
                 return RedirectToAction(nameof(Index));

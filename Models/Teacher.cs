@@ -5,13 +5,14 @@ namespace SchoolApp.Models
 {
     public class Teacher
     {
-        public int Id { get; set; }
-        public string FullName { get; set; }
         public int TeacherId { get; set; }
-        public Course Course { get; set; }
+        public string TeacherName { get; set; }
 
-        
+        public int CourseId { get; set; }
+        public List<Course> Courses { get; set; }
 
+
+        //public List<Course> Courses { get; set; }
 
 
     }

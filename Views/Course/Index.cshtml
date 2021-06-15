@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SchoolApp.Models.Course>
 
 @{
-    ViewData["Title"] = "Course";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Courses</h1>
+<h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Add new course</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -15,9 +15,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Material)
             </th>
-            
-            
-            
+            <th>
+                @Html.DisplayNameFor(model => model.Teachers.TeacherName)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -26,6 +26,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Material)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teachers.TeacherName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

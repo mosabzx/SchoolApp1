@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SchoolApp.Data;
 using SchoolApp.Models;
 using System;
@@ -36,6 +37,7 @@ namespace SchoolApp.Controllers
         // GET: AssignmentController/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 

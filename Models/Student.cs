@@ -9,7 +9,7 @@ namespace SchoolApp.Models
     public class Student
     {
         public int Id { get; set; }
-        public string FullName { get; set; }
+        public string StudentName { get; set; }
 
         public IList<StudentCourse> StudentCourses { get; set; }
 

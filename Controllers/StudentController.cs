@@ -37,8 +37,11 @@ namespace SchoolApp.Controllers
         // GET: StudentController/Create
         public ActionResult Create()
         {
-
-            return View();
+            var model = new Student
+            {
+                StudentCourses = db.StudentCourses.ToList()
+            };
+            return View(model);
         }
 
         // POST: StudentController/Create
