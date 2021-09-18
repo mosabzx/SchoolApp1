@@ -84,7 +84,8 @@ namespace SchoolApp.Controllers
         // GET: AssignmentController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var assignment = db.Assignments.Find(id);
+            return View(assignment);
         }
 
         // POST: AssignmentController/Delete/5
@@ -95,6 +96,7 @@ namespace SchoolApp.Controllers
             try
             {
                 db.Assignments.Remove(assignment);
+                Commit();
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -93,7 +93,8 @@ namespace SchoolApp.Controllers
         // GET: TeacherController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var teacher = db.Teachers.Find(id);
+            return View(teacher);
         }
 
         // POST: TeacherController/Delete/5

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolApp.Models;
+using SchoolApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,20 +21,21 @@ namespace SchoolApp.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<StudentCourse> StudentCourses { get; set; }
+        public DbSet<StudentCourseViewModel> StudentCourseViewModels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //One to One.
-            //modelBuilder.Entity<Course>()
-            //    .HasOne<Teacher>(t => t.FullName)
-            //    .WithOne(c => c.Course)
-            //    .HasForeignKey<Teacher>(t => t.TeacherId);
+            modelBuilder.Entity<Teacher>()
+                .HasMany<Course>(c => c.Courses)
+                .WithOne(t => t.Teacher)
+                .HasForeignKey(fk => fk.CId);
 
             //One to Many.
-            //modelBuilder.Entity<Course>()
-            //    .HasMany<Assignment>(a => a.Assignments)
-            //    .WithOne(c => c.Course)
-            //    .HasForeignKey(ca => ca.AssignemtId);
+            modelBuilder.Entity<Assignment>()
+                .HasMany<Course>(c => c.Courses)
+                .WithOne(a => a.Assignment)
+                .HasForeignKey(fk => fk.CId);
 
             //Many To Many.
             modelBuilder.Entity<StudentCourse>().HasKey(sc => new { sc.SId, sc.CId });

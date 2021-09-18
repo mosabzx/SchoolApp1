@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolApp.Data;
 using SchoolApp.Models;
+using SchoolApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,13 @@ namespace SchoolApp.Controllers
         // GET: CourseController
         public ActionResult Index()
         {
-            
-            var courses = db.Courses.Include(t => t.Teachers).ToList();
+            var courses = db.Courses.ToList();
             return View(courses);
+
+            //return View();
+
+            //var courses = db.Courses.Include(t => t.Teachers).ToList();
+            //return View(courses);
         }
 
 

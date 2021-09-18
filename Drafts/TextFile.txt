@@ -13,3 +13,63 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Teacher.FullName)
         </dd>
+
+//---------------------------------
+Realations: 
+//One to One.
+            modelBuilder.Entity<Course>()
+                .HasOne<Teacher>(t => t.Teacher)
+                .WithMany(c => c.Courses)
+                .HasForeignKey(t => t.TeacherId);
+
+            //One to Many.
+            modelBuilder.Entity<Assignment>()
+                .HasOne<Course>(c => c.Course)
+                .WithMany(a => a.Assignments)
+                .HasForeignKey(ca => ca.CId);
+
+            //Many To Many.
+            modelBuilder.Entity<StudentCourse>().HasKey(sc => new { sc.SId, sc.CId });
+
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne<Student>(sc => sc.Student)
+                .WithMany(s => s.StudentCourses)
+                .HasForeignKey(sc => sc.SId);
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne<Course>(sc => sc.Course)
+                .WithMany(s => s.StudentCourses)
+                .HasForeignKey(sc => sc.CId);
+
+--------------------------
+One to one update test:
+ //One to One.
+            modelBuilder.Entity<Teacher>()
+                .HasMany<Course>(c => c.Courses)
+                .WithOne(t => t.Teacher)
+                .HasForeignKey(t => t.TeacherId);
+-----------------------------
+Test Updte 2 : 
+ //One to One.
+            modelBuilder.Entity<Course>()
+                .HasOne<Teacher>(t => t.Teacher)
+                .WithMany(c => c.Courses)
+                .HasForeignKey(t => t.TeacherId);
+
+            //One to Many.
+            modelBuilder.Entity<Assignment>()
+                .HasOne<Course>(c => c.Course)
+                .WithMany(a => a.Assignments)
+                .HasForeignKey(ca => ca.CId);
+
+            //Many To Many.
+            modelBuilder.Entity<StudentCourse>().HasKey(sc => new { sc.SId, sc.CId });
+
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne<Student>(sc => sc.Student)
+                .WithMany(s => s.StudentCourses)
+                .HasForeignKey(sc => sc.SId);
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne<Course>(sc => sc.Course)
+                .WithMany(s => s.StudentCourses)
+                .HasForeignKey(sc => sc.CId
+----------------------------------------------------------

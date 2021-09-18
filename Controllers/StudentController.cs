@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SchoolApp.Data;
 using SchoolApp.Models;
+using SchoolApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,11 +39,8 @@ namespace SchoolApp.Controllers
         // GET: StudentController/Create
         public ActionResult Create()
         {
-            var model = new Student
-            {
-                StudentCourses = db.StudentCourses.ToList()
-            };
-            return View(model);
+            
+            return View();
         }
 
         // POST: StudentController/Create

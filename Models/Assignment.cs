@@ -8,14 +8,10 @@ namespace SchoolApp.Models
         public int AssignmentId { get; set; }
         public string Title { get; set; }
 
-        
-        public List<Course> Courses { get; set; }
+        public int CId { get; set; }
+        public ICollection<Course> Courses { get; set; }
 
 
-
-
-
-        //public int AssignemtId { get; set; }
 
 
 
