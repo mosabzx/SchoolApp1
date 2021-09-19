@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolApp.Models;
-using SchoolApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +20,7 @@ namespace SchoolApp.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<StudentCourse> StudentCourses { get; set; }
-        public DbSet<StudentCourseViewModel> StudentCourseViewModels { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
