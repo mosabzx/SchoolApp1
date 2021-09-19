@@ -22,7 +22,6 @@ namespace SchoolApp.Controllers
         }
 
         
-        
 
         // GET: CourseController
         public ActionResult Index()
@@ -35,6 +34,8 @@ namespace SchoolApp.Controllers
             //var courses = db.Courses.Include(t => t.Teachers).ToList();
             //return View(courses);
         }
+
+
 
 
         // GET: CourseController/Details/5

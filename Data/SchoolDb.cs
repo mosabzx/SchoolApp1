@@ -24,16 +24,16 @@ namespace SchoolApp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //One to One.
-            modelBuilder.Entity<Teacher>()
-                .HasMany<Course>(c => c.Courses)
-                .WithOne(t => t.Teacher)
+            //One to Many.
+            modelBuilder.Entity<Course>()
+                .HasMany<Teacher>(t => t.Teachers)
+                .WithOne(c => c.Course)
                 .HasForeignKey(fk => fk.CId);
 
             //One to Many.
-            modelBuilder.Entity<Assignment>()
-                .HasMany<Course>(c => c.Courses)
-                .WithOne(a => a.Assignment)
+            modelBuilder.Entity<Course>()
+                .HasMany<Assignment>(a => a.Assignments)
+                .WithOne(c => c.Course)
                 .HasForeignKey(fk => fk.CId);
 
             //Many To Many.

@@ -9,7 +9,7 @@ namespace SchoolApp.Models
         public string Title { get; set; }
 
         public int CId { get; set; }
-        public ICollection<Course> Courses { get; set; }
+        public Course Course { get; set; }
 
 
 

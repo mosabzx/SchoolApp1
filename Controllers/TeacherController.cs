@@ -40,13 +40,13 @@ namespace SchoolApp.Controllers
         public ActionResult Create()
         {
 
-            var model = new Teacher
-            {
-                Courses = db.Courses.ToList()
-            };
+            //var model = new Teacher
+            //{
+            //    Courses = db.Courses.ToList()
+            //};
 
-            return View(model);
-            //return View();
+            //return View(model);
+            return View();
         }
 
         // POST: TeacherController/Create
