@@ -13,7 +13,7 @@ namespace SchoolApp.Controllers
     public class AssignmentController : Controller
     {
 
-        SchoolDb db;
+        private readonly SchoolDb db;
         public AssignmentController(SchoolDb _db)
         {
             db = _db;

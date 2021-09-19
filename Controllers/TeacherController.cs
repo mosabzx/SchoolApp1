@@ -11,13 +11,13 @@ namespace SchoolApp.Controllers
 {
     public class TeacherController : Controller
     {
-        SchoolDb db;
-        Teacher teacher;
+       private readonly SchoolDb db;
         
-        public TeacherController(SchoolDb _db,Teacher _teacher)
+        
+        public TeacherController(SchoolDb _db)
         {
             db = _db;
-            teacher = _teacher;
+            
         }
 
 
