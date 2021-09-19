@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolApp.Data;
 using SchoolApp.Models;
-using SchoolApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +13,7 @@ namespace SchoolApp.Controllers
     public class StudentController : Controller
     {
 
-        SchoolDb db;
+       private readonly SchoolDb db;
 
         public StudentController(SchoolDb _db)
         {

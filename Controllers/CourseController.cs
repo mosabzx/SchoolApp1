@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolApp.Data;
 using SchoolApp.Models;
-using SchoolApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +13,11 @@ namespace SchoolApp.Controllers
     public class CourseController : Controller
     {
        private readonly SchoolDb db;
-        public Course Obcourse;
-        public CourseController(SchoolDb _db,Course Obcourse)
+        
+        public CourseController(SchoolDb _db)
         {
             db = _db;
-            this.Obcourse = Obcourse;
+            
 
         }
 

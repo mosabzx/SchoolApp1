@@ -9,14 +9,12 @@ namespace SchoolApp.Models
         
         [Key]
         public int CId { get; set; }
-        
         public string Material { get; set; }
 
-        
+
         public Teacher Teacher { get; set; }
         
         public Assignment Assignment { get; set; }
-
 
         public IList<StudentCourse> StudentCourses { get; set; }
 
