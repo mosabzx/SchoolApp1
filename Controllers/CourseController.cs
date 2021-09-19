@@ -59,8 +59,12 @@ namespace SchoolApp.Controllers
         {
             try
             {
-                db.Courses.Add(course);
-                Commit();
+                if (ModelState.IsValid)
+                {
+                    db.Courses.Add(course);
+                    Commit();
+                    
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -72,7 +76,8 @@ namespace SchoolApp.Controllers
         // GET: CourseController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var course = db.Courses.Find(id);
+            return View(course);
         }
 
         // POST: CourseController/Edit/5
@@ -95,7 +100,8 @@ namespace SchoolApp.Controllers
         // GET: CourseController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var course = db.Courses.Find(id);
+            return View(course);
         }
 
         // POST: CourseController/Delete/5
@@ -105,6 +111,7 @@ namespace SchoolApp.Controllers
         {
             try
             {
+                
                 db.Courses.Remove(Obcourse);
                 Commit();
                 return RedirectToAction(nameof(Index));
