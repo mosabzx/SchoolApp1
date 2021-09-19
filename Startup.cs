@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SchoolApp.Data;
 using SchoolApp.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,7 @@ namespace SchoolApp
             services.AddScoped<Student>();
             services.AddScoped<Teacher>();
             services.AddScoped<StudentCourse>();
+            
 
 
             services.AddDbContext<SchoolDb>(options =>
