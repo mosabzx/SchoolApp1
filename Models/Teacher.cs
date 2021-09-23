@@ -6,11 +6,11 @@ namespace SchoolApp.Models
 {
     public class Teacher
     {
-        [Key]
+        //[Key]
         public int TeacherId { get; set; }
         public string TeacherName { get; set; }
 
-        public int CId { get; set; }
+        public int CourseId { get; set; }
         public Course Course { get; set; }
 
 

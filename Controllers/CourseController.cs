@@ -59,12 +59,11 @@ namespace SchoolApp.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    db.Courses.Add(course);
-                    Commit();
+                
+                db.Courses.Add(course);
+                Commit();
                     
-                }
+                
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -11,7 +11,7 @@ namespace SchoolApp.Models
     {
         
         [Key]
-        public int SId { get; set; }
+        public int StudentId { get; set; }
         public string StudentName { get; set; }
        
 

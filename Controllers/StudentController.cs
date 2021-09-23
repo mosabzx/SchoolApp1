@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolApp.Data;
 using SchoolApp.Models;
+using SchoolApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,10 @@ namespace SchoolApp.Controllers
         // GET: StudentController/Create
         public ActionResult Create()
         {
+            //var model = new StudentCourseVM
+            //{
+            //    Courses = db.Courses.ToList()
+            //};
             
             return View();
         }
@@ -49,6 +54,15 @@ namespace SchoolApp.Controllers
         {
             try
             {
+                //var course = db.Courses.Find(model.CourseId);
+                //var student = new Student
+                //{
+                //    StudentId = model.StudentId,
+                //    StudentName = model.StudenName,
+                //    StudentCourses = 
+                //};
+
+
                 db.Students.Add(student);
                 Commit();
                 return RedirectToAction(nameof(Index));
@@ -62,7 +76,8 @@ namespace SchoolApp.Controllers
         // GET: StudentController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var student = db.Students.Find(id);
+            return View(student);
         }
 
         // POST: StudentController/Edit/5
@@ -85,13 +100,14 @@ namespace SchoolApp.Controllers
         // GET: StudentController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var studen = db.Students.Find(id);
+            return View(studen);
         }
 
         // POST: StudentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete( int id,Student student)
+        public ActionResult Delete(Student student)
         {
             try
             {

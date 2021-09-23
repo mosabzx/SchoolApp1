@@ -1,4 +1,26 @@
-﻿asp-items="@( new SelectList(Model.Courses, "Id","Material"))"></select>
+﻿ Course = db.Courses.Include(t=> t.Teachers).ToList()
+
+
+
+
+
+ asp-items="@( new SelectList(Model.Course, "CourseId","Material"))"
+
+asp-items="@( new SelectList(Model.Courses, "Id","Material"))"></select>
+
+asp-items="@( new SelectList(Model.Course, "CId","Material"))"
+
+<div class="form-group">
+    <label asp-for="CId" class="control-label">Course: </label>
+    <select class="form-control" asp-items="@( new SelectList(Model.Courses, "CId","Material"))"></select>
+</div>
+
+ <div class="form-group">
+    <label asp-for="CourseId" class="control-label">Course</label>
+    <select class="form-control" asp-items="@( new SelectList(Model.CourseList, "CId","Material"))"></select>
+ </div>
+
+
 
 
 <th>@Html.DisplayNameFor(model => model.Teacher.FullName)</th>

@@ -10,26 +10,26 @@ namespace SchoolApp.Migrations
                 name: "Courses",
                 columns: table => new
                 {
-                    CId = table.Column<int>(type: "int", nullable: false)
+                    CourseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Material = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Courses", x => x.CId);
+                    table.PrimaryKey("PK_Courses", x => x.CourseId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
-                    SId = table.Column<int>(type: "int", nullable: false)
+                    StudentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StudentName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Students", x => x.SId);
+                    table.PrimaryKey("PK_Students", x => x.StudentId);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,16 +39,16 @@ namespace SchoolApp.Migrations
                     AssignmentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CId = table.Column<int>(type: "int", nullable: false)
+                    CourseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Assignments", x => x.AssignmentId);
                     table.ForeignKey(
-                        name: "FK_Assignments_Courses_CId",
-                        column: x => x.CId,
+                        name: "FK_Assignments_Courses_CourseId",
+                        column: x => x.CourseId,
                         principalTable: "Courses",
-                        principalColumn: "CId",
+                        principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -59,16 +59,16 @@ namespace SchoolApp.Migrations
                     TeacherId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TeacherName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CId = table.Column<int>(type: "int", nullable: false)
+                    CourseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Teachers", x => x.TeacherId);
                     table.ForeignKey(
-                        name: "FK_Teachers_Courses_CId",
-                        column: x => x.CId,
+                        name: "FK_Teachers_Courses_CourseId",
+                        column: x => x.CourseId,
                         principalTable: "Courses",
-                        principalColumn: "CId",
+                        principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -76,40 +76,40 @@ namespace SchoolApp.Migrations
                 name: "StudentCourses",
                 columns: table => new
                 {
-                    SId = table.Column<int>(type: "int", nullable: false),
-                    CId = table.Column<int>(type: "int", nullable: false)
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    CourseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StudentCourses", x => new { x.SId, x.CId });
+                    table.PrimaryKey("PK_StudentCourses", x => new { x.StudentId, x.CourseId });
                     table.ForeignKey(
-                        name: "FK_StudentCourses_Courses_CId",
-                        column: x => x.CId,
+                        name: "FK_StudentCourses_Courses_CourseId",
+                        column: x => x.CourseId,
                         principalTable: "Courses",
-                        principalColumn: "CId",
+                        principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StudentCourses_Students_SId",
-                        column: x => x.SId,
+                        name: "FK_StudentCourses_Students_StudentId",
+                        column: x => x.StudentId,
                         principalTable: "Students",
-                        principalColumn: "SId",
+                        principalColumn: "StudentId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Assignments_CId",
+                name: "IX_Assignments_CourseId",
                 table: "Assignments",
-                column: "CId");
+                column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentCourses_CId",
+                name: "IX_StudentCourses_CourseId",
                 table: "StudentCourses",
-                column: "CId");
+                column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teachers_CId",
+                name: "IX_Teachers_CourseId",
                 table: "Teachers",
-                column: "CId");
+                column: "CourseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -9,7 +9,7 @@ using SchoolApp.Data;
 namespace SchoolApp.Migrations
 {
     [DbContext(typeof(SchoolDb))]
-    [Migration("20210919115914_CreateDB")]
+    [Migration("20210922073600_CreateDB")]
     partial class CreateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace SchoolApp.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -35,14 +35,14 @@ namespace SchoolApp.Migrations
 
                     b.HasKey("AssignmentId");
 
-                    b.HasIndex("CId");
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Assignments");
                 });
 
             modelBuilder.Entity("SchoolApp.Models.Course", b =>
                 {
-                    b.Property<int>("CId")
+                    b.Property<int>("CourseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -50,14 +50,14 @@ namespace SchoolApp.Migrations
                     b.Property<string>("Material")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CId");
+                    b.HasKey("CourseId");
 
                     b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("SchoolApp.Models.Student", b =>
                 {
-                    b.Property<int>("SId")
+                    b.Property<int>("StudentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -65,22 +65,22 @@ namespace SchoolApp.Migrations
                     b.Property<string>("StudentName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SId");
+                    b.HasKey("StudentId");
 
                     b.ToTable("Students");
                 });
 
             modelBuilder.Entity("SchoolApp.Models.StudentCourse", b =>
                 {
-                    b.Property<int>("SId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.HasKey("SId", "CId");
+                    b.HasKey("StudentId", "CourseId");
 
-                    b.HasIndex("CId");
+                    b.HasIndex("CourseId");
 
                     b.ToTable("StudentCourses");
                 });
@@ -92,7 +92,7 @@ namespace SchoolApp.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("TeacherName")
@@ -100,7 +100,7 @@ namespace SchoolApp.Migrations
 
                     b.HasKey("TeacherId");
 
-                    b.HasIndex("CId");
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Teachers");
                 });
@@ -109,7 +109,7 @@ namespace SchoolApp.Migrations
                 {
                     b.HasOne("SchoolApp.Models.Course", "Course")
                         .WithMany("Assignments")
-                        .HasForeignKey("CId")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -120,13 +120,13 @@ namespace SchoolApp.Migrations
                 {
                     b.HasOne("SchoolApp.Models.Course", "Course")
                         .WithMany("StudentCourses")
-                        .HasForeignKey("CId")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SchoolApp.Models.Student", "Student")
                         .WithMany("StudentCourses")
-                        .HasForeignKey("SId")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -139,7 +139,7 @@ namespace SchoolApp.Migrations
                 {
                     b.HasOne("SchoolApp.Models.Course", "Course")
                         .WithMany("Teachers")
-                        .HasForeignKey("CId")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

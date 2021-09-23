@@ -8,10 +8,10 @@ namespace SchoolApp.Models
     public class StudentCourse
     {
         //Joining Entity for Student and Course.
-        public int SId { get; set; } //ForeignKey
+        public int StudentId { get; set; } //ForeignKey
         public Student Student { get; set; }
 
-        public int CId { get; set; } //ForeignKey
+        public int CourseId { get; set; } //ForeignKey
         public Course Course { get; set; }
         
     }

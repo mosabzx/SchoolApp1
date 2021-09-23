@@ -7,13 +7,15 @@ namespace SchoolApp.Models
     public class Course
     {
 
-        [Key]
-        public int CId { get; set; }
+        //[Key]
+        public int CourseId { get; set; }
+        
         public string Material { get; set; }
 
-
+       
         public IList<Teacher> Teachers { get; set; }
-        
+
+       
         public IList<Assignment> Assignments { get; set; }
 
         public IList<StudentCourse> StudentCourses { get; set; }
