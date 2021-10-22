@@ -13,14 +13,19 @@
     <thead>
         <tr>
             <th>
+               Course Id's   @*@Html.DisplayNameFor(model => model.CourseId)*@
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Material)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseId)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Material)
             </td>

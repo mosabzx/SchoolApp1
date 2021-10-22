@@ -95,3 +95,78 @@ Test Updte 2 :
                 .WithMany(s => s.StudentCourses)
                 .HasForeignKey(sc => sc.CId
 ----------------------------------------------------------
+Student Course Controller :
+
+ //var studentCourseIDs = new StudentCourse
+            //{
+            //    StudentId = model.StudentId,
+            //    CourseId = model.CourseId
+            //};
+
+
+ foreach (var CId in CourseIds)
+            {
+                model.CourseId = CId;
+                CourseIds.Add(CId);
+               
+            }
+
+var courseId = db.Courses.Find(model.CourseId);
+var studentId = db.Students.Find(model.StudentId);
+
+
+
+(StudentCourseVM model,List<int> CourseIds)
+
+
+
+ var model = new StudentCourseVM
+    {
+        StudentId = model.StudentId,
+        CourseId = db.Courses.Where(c => c.CourseId == CoId).SingleOrDefault().CourseId,
+    };
+
+
+
+
+    TempData["Conflict"] = $"The Course Id's {String.Join(",", ConflictList)} Is already assigned for this student Id {model.StudentId}";
+
+     return RedirectToAction("AssignToCourses");
+
+
+      else if (count == ConflictList.Count)
+                    {
+                        TempData["Conflict"] = $"The Course Id's {String.Join(",", ConflictList)} Is already assigned for this student Id {model.StudentId}";
+
+                        return RedirectToAction("AssignToCourses");
+                    }
+
+if (count == ConflictList.Count)
+                {
+                    TempData["Conflict"] = $"The Course Id's {String.Join(",", ConflictList)} Is already assigned for this student Id {model.StudentId}";
+
+                    return RedirectToAction("AssignToCourses");
+                }
+
+foreach (var SCId in db.StudentCourses)
+                {
+
+                    if (SCId.StudentId == model.StudentId && SCId.CourseId == courseId && count == ConflictList.Count)
+                    {
+                        TempData["Conflict"] = $"The Course Id's {String.Join(",", ConflictList)} Is already assigned for this student Id {model.StudentId}";
+
+                        return RedirectToAction("AssignToCourses");
+
+                    }
+                    
+                    
+                }
+
+
+  var check = db.StudentCourses.Where(sc => sc.StudentId == model.StudentId).Select(sc => new { existId = sc.CourseId });
+
+  await check.ForEachAsync(id => ConflictList.Add(id.existId));
+
+{String.Join(",", ConflictList)}
+
+ return RedirectToAction(nameof(StudentCourseIndex));

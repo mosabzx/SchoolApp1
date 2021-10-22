@@ -1,0 +1,93 @@
+﻿@model SchoolApp.ViewModels.StudentCourseVM
+
+
+@{
+    ViewData["Title"] = "AssignToCourses";
+
+}
+@*@if (ViewBag.Conflict != null)
+{
+
+}*@
+
+<h1>Assign To Courses</h1>
+
+<h4>Assign Student To Courses</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">
+                Student Name
+            </dt>
+
+
+            <dd class="col-sm-8">
+                @Html.DisplayFor(Model => Model.StudentName)
+            </dd>
+
+        </dl>
+
+
+        <form asp-action="AssignToCourses">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="form-group">
+
+                <label asp-for="StudentId" class="control-label">Student Id: @Html.DisplayFor(model => model.StudentId)</label>
+                <br />
+                <input hidden asp-for="StudentId" class="form-control" />
+
+            </div>
+
+            @*<div class="form-group">
+                    <label asp-for="CourseId" class="control-label">Choose Courses</label>
+                    <select asp-for="CourseId" class="form-control" asp-items="@( new SelectList(Model.Courses, "CourseId","Material"))"></select>
+                    <span asp-validation-for="CourseId" class="text-danger"></span>
+                </div>*@
+
+
+
+
+            <ul class="list-unstyled">
+
+                <li>Courses: </li>
+
+                @foreach (var item in Model.Courses)
+                {
+                    <li>
+                        <label for="@Model.CourseId"></label>
+                        <input type="Checkbox" name="CourseIds" value="@item.CourseId" /> @Html.DisplayFor(modelItem => item.Material)
+
+                        <span asp-validation-for="CourseId" class="text-danger"></span>
+                    </li>
+
+                }
+
+
+            </ul>
+
+
+            <div class="form-group">
+                <input type="submit" value="Assign" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <div class="text-danger">
+            @ViewBag.Conflict
+        </div>
+
+        <hr />
+
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-outline-primary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

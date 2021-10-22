@@ -57,7 +57,7 @@ namespace SchoolApp.Controllers
                 {
                     AssignmentId = model.AssignmentId,
                     Title = model.Title,
-                    Course =course
+                    Course = course
 
                 };
 

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SchoolApp.Models.StudentCourse>
+
+@{
+    ViewData["Title"] = "StudentCourseIndex";
+}
+
+<h1>StudentCourseIndex</h1>
+
+<p>
+    <a asp-action="Index">Students</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Student.StudentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course.CourseId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseId)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

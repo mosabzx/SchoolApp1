@@ -63,6 +63,9 @@ namespace SchoolApp.Data
         public DbSet<SchoolApp.ViewModels.AssignmentCourseVM> AssignmentCourseVM { get; set; }
         
 
+        public DbSet<SchoolApp.ViewModels.StudentCourseVM> StudentCourseVM { get; set; }
+        
+
        
 
 
