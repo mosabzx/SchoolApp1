@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolApp.Data;
 using SchoolApp.Models;
+using SchoolApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,7 @@ namespace SchoolApp.Controllers
 
             //return View();
 
-            //var courses = db.Courses.Include(t => t.Teachers).ToList();
-            //return View(courses);
+            
         }
 
 
@@ -41,9 +41,43 @@ namespace SchoolApp.Controllers
         // GET: CourseController/Details/5
         public ActionResult Details(int id)
         {
-            var course = db.Courses.Find(id);
-            return View(course);
+
+            //var courseId = db.Courses.Where(c => c.CourseId == id).FirstOrDefault().CourseId;
+            var TiedTeachers = (from t in db.Teachers
+                               join c in db.Courses
+                               on t.CourseId equals c.CourseId
+                               where c.CourseId == id
+                               select t);
+            var TiedAssignments = (from a in db.Assignments
+                                  join c in db.Courses
+                                  on a.CourseId equals c.CourseId
+                                  where c.CourseId == id
+                                  select a);
+            var TiedStudents = (from s in db.Students
+                                join sc in db.StudentCourses
+                                on s.StudentId equals sc.StudentId
+                                where sc.CourseId == id
+                                select s);
+
+
+            var courseDetails = new CourseDetailsVM
+            {
+                CourseId = id,
+                Course = db.Courses.Find(id),
+                CList = db.Courses.ToList(),
+                TList = TiedTeachers.ToList(),
+                Alist = TiedAssignments.ToList(),
+                SList = TiedStudents.ToList(),
+            };
+
+
+            return View(courseDetails);
+
+
         }
+
+
+
 
 
         // GET: CourseController/Create

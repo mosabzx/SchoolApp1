@@ -25,7 +25,7 @@ namespace SchoolApp.Controllers
         // GET: StudentController
         public ActionResult Index()
         {
-            ViewBag.Test = " Hello There Test";
+            
             var students = db.Students.ToList();
             return View(students);
         }
