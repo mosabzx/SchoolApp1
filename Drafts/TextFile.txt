@@ -1,4 +1,26 @@
-﻿asp-items="@( new SelectList(Model.Courses, "Id","Material"))"></select>
+﻿ Course = db.Courses.Include(t=> t.Teachers).ToList()
+
+
+
+
+
+ asp-items="@( new SelectList(Model.Course, "CourseId","Material"))"
+
+asp-items="@( new SelectList(Model.Courses, "Id","Material"))"></select>
+
+asp-items="@( new SelectList(Model.Course, "CId","Material"))"
+
+<div class="form-group">
+    <label asp-for="CId" class="control-label">Course: </label>
+    <select class="form-control" asp-items="@( new SelectList(Model.Courses, "CId","Material"))"></select>
+</div>
+
+ <div class="form-group">
+    <label asp-for="CourseId" class="control-label">Course</label>
+    <select class="form-control" asp-items="@( new SelectList(Model.CourseList, "CId","Material"))"></select>
+ </div>
+
+
 
 
 <th>@Html.DisplayNameFor(model => model.Teacher.FullName)</th>
@@ -13,3 +35,138 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Teacher.FullName)
         </dd>
+
+//---------------------------------
+Realations: 
+//One to One.
+            modelBuilder.Entity<Course>()
+                .HasOne<Teacher>(t => t.Teacher)
+                .WithMany(c => c.Courses)
+                .HasForeignKey(t => t.TeacherId);
+
+            //One to Many.
+            modelBuilder.Entity<Assignment>()
+                .HasOne<Course>(c => c.Course)
+                .WithMany(a => a.Assignments)
+                .HasForeignKey(ca => ca.CId);
+
+            //Many To Many.
+            modelBuilder.Entity<StudentCourse>().HasKey(sc => new { sc.SId, sc.CId });
+
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne<Student>(sc => sc.Student)
+                .WithMany(s => s.StudentCourses)
+                .HasForeignKey(sc => sc.SId);
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne<Course>(sc => sc.Course)
+                .WithMany(s => s.StudentCourses)
+                .HasForeignKey(sc => sc.CId);
+
+--------------------------
+One to one update test:
+ //One to One.
+            modelBuilder.Entity<Teacher>()
+                .HasMany<Course>(c => c.Courses)
+                .WithOne(t => t.Teacher)
+                .HasForeignKey(t => t.TeacherId);
+-----------------------------
+Test Updte 2 : 
+ //One to One.
+            modelBuilder.Entity<Course>()
+                .HasOne<Teacher>(t => t.Teacher)
+                .WithMany(c => c.Courses)
+                .HasForeignKey(t => t.TeacherId);
+
+            //One to Many.
+            modelBuilder.Entity<Assignment>()
+                .HasOne<Course>(c => c.Course)
+                .WithMany(a => a.Assignments)
+                .HasForeignKey(ca => ca.CId);
+
+            //Many To Many.
+            modelBuilder.Entity<StudentCourse>().HasKey(sc => new { sc.SId, sc.CId });
+
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne<Student>(sc => sc.Student)
+                .WithMany(s => s.StudentCourses)
+                .HasForeignKey(sc => sc.SId);
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne<Course>(sc => sc.Course)
+                .WithMany(s => s.StudentCourses)
+                .HasForeignKey(sc => sc.CId
+----------------------------------------------------------
+Student Course Controller :
+
+ //var studentCourseIDs = new StudentCourse
+            //{
+            //    StudentId = model.StudentId,
+            //    CourseId = model.CourseId
+            //};
+
+
+ foreach (var CId in CourseIds)
+            {
+                model.CourseId = CId;
+                CourseIds.Add(CId);
+               
+            }
+
+var courseId = db.Courses.Find(model.CourseId);
+var studentId = db.Students.Find(model.StudentId);
+
+
+
+(StudentCourseVM model,List<int> CourseIds)
+
+
+
+ var model = new StudentCourseVM
+    {
+        StudentId = model.StudentId,
+        CourseId = db.Courses.Where(c => c.CourseId == CoId).SingleOrDefault().CourseId,
+    };
+
+
+
+
+    TempData["Conflict"] = $"The Course Id's {String.Join(",", ConflictList)} Is already assigned for this student Id {model.StudentId}";
+
+     return RedirectToAction("AssignToCourses");
+
+
+      else if (count == ConflictList.Count)
+                    {
+                        TempData["Conflict"] = $"The Course Id's {String.Join(",", ConflictList)} Is already assigned for this student Id {model.StudentId}";
+
+                        return RedirectToAction("AssignToCourses");
+                    }
+
+if (count == ConflictList.Count)
+                {
+                    TempData["Conflict"] = $"The Course Id's {String.Join(",", ConflictList)} Is already assigned for this student Id {model.StudentId}";
+
+                    return RedirectToAction("AssignToCourses");
+                }
+
+foreach (var SCId in db.StudentCourses)
+                {
+
+                    if (SCId.StudentId == model.StudentId && SCId.CourseId == courseId && count == ConflictList.Count)
+                    {
+                        TempData["Conflict"] = $"The Course Id's {String.Join(",", ConflictList)} Is already assigned for this student Id {model.StudentId}";
+
+                        return RedirectToAction("AssignToCourses");
+
+                    }
+                    
+                    
+                }
+
+
+  var check = db.StudentCourses.Where(sc => sc.StudentId == model.StudentId).Select(sc => new { existId = sc.CourseId });
+
+  await check.ForEachAsync(id => ConflictList.Add(id.existId));
+
+{String.Join(",", ConflictList)}
+
+ return RedirectToAction(nameof(StudentCourseIndex));

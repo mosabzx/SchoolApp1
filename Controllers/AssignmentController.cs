@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolApp.Data;
 using SchoolApp.Models;
+using SchoolApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace SchoolApp.Controllers
     public class AssignmentController : Controller
     {
 
-        SchoolDb db;
+        private readonly SchoolDb db;
         public AssignmentController(SchoolDb _db)
         {
             db = _db;
@@ -31,23 +32,35 @@ namespace SchoolApp.Controllers
         public ActionResult Details(int id)
         {
             var assignment = db.Assignments.Find(id);
-            return View();
+            return View(assignment);
         }
 
         // GET: AssignmentController/Create
         public ActionResult Create()
         {
-            
-            return View();
+            var model = new AssignmentCourseVM
+            {
+                Courses = db.Courses.ToList()
+            };
+            return View(model);
         }
 
         // POST: AssignmentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Assignment assignment)
+        public ActionResult Create(AssignmentCourseVM model)
         {
             try
             {
+                var course = db.Courses.Find(model.CourseId);
+                var assignment = new Assignment
+                {
+                    AssignmentId = model.AssignmentId,
+                    Title = model.Title,
+                    Course = course
+
+                };
+
                 db.Assignments.Add(assignment);
                 Commit();
                 return RedirectToAction(nameof(Index));
@@ -61,16 +74,34 @@ namespace SchoolApp.Controllers
         // GET: AssignmentController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var assignment = db.Assignments.Find(id);
+            var ViewModel = new AssignmentCourseVM
+            {
+                AssignmentId = assignment.AssignmentId,
+                Title = assignment.Title,
+                CourseId = assignment.CourseId,
+                Courses = db.Courses.ToList()
+                
+            };
+            return View(ViewModel);
         }
 
         // POST: AssignmentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Assignment assignment)
+        public ActionResult Edit(int id, AssignmentCourseVM model)
         {
             try
             {
+                var course = db.Courses.Find(model.CourseId);
+                var assignment = new Assignment
+                {
+                    AssignmentId = model.AssignmentId,
+                    Title = model.Title,
+                    Course = course
+
+                };
+
                 db.Assignments.Update(assignment);
                 Commit();
                 return RedirectToAction(nameof(Index));
@@ -84,7 +115,8 @@ namespace SchoolApp.Controllers
         // GET: AssignmentController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var assignment = db.Assignments.Find(id);
+            return View(assignment);
         }
 
         // POST: AssignmentController/Delete/5
@@ -95,6 +127,7 @@ namespace SchoolApp.Controllers
             try
             {
                 db.Assignments.Remove(assignment);
+                Commit();
                 return RedirectToAction(nameof(Index));
             }
             catch

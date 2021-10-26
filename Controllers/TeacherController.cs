@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SchoolApp.Data;
 using SchoolApp.Models;
+using SchoolApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +13,20 @@ namespace SchoolApp.Controllers
 {
     public class TeacherController : Controller
     {
-        SchoolDb db;
-        Teacher teacher;
+       private readonly SchoolDb db;
         
-        public TeacherController(SchoolDb _db,Teacher _teacher)
+
+        public TeacherController(SchoolDb _db)
         {
             db = _db;
-            teacher = _teacher;
+            
         }
 
 
         // GET: TeacherController
         public ActionResult Index()
         {
+
             var teacher = db.Teachers.ToList();
             return View(teacher);
         }
@@ -40,29 +43,44 @@ namespace SchoolApp.Controllers
         public ActionResult Create()
         {
 
-            var model = new Teacher
+            var model = new TeacherCourseVM
             {
-                Courses = db.Courses.ToList()
+                
+                Courses = db.Courses.ToList(),
             };
 
+            
+
+
             return View(model);
-            //return View();
+
+
         }
 
         // POST: TeacherController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Teacher teacher)
+        public  ActionResult  Create(TeacherCourseVM model)
         {
             try
             {
-                 
+
+
+                var course = db.Courses.Find(model.CourseId);
+                Teacher teacher = new Teacher
+                {
+                    TeacherId = model.TeacherId,
+                    TeacherName = model.TeacherName,
+                    Course = course
+                };
+
                 db.Teachers.Add(teacher);
                 Commit();
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
+                //throw new Exception(ex.InnerException.Message);
                 return View();
             }
         }
@@ -70,16 +88,31 @@ namespace SchoolApp.Controllers
         // GET: TeacherController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var teacher = db.Teachers.Find(id);
+            var ViewModel = new TeacherCourseVM
+            {
+                TeacherId = teacher.TeacherId,
+                TeacherName = teacher.TeacherName,
+                CourseId = teacher.CourseId,
+                Courses = db.Courses.ToList()
+            };
+            return View(ViewModel);
         }
 
         // POST: TeacherController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Teacher teacher)
+        public ActionResult Edit(TeacherCourseVM model)
         {
             try
             {
+                var course = db.Courses.Find(model.CourseId);
+                Teacher teacher = new Teacher
+                {
+                    TeacherId = model.TeacherId,
+                    TeacherName = model.TeacherName,
+                    Course = course
+                };
                 db.Teachers.Update(teacher);
                 Commit();
                 return RedirectToAction(nameof(Index));
@@ -93,7 +126,8 @@ namespace SchoolApp.Controllers
         // GET: TeacherController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var teacher = db.Teachers.Find(id);
+            return View(teacher);
         }
 
         // POST: TeacherController/Delete/5
