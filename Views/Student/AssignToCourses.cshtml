@@ -41,24 +41,17 @@
 
             </div>
 
-            @*<div class="form-group">
-                    <label asp-for="CourseId" class="control-label">Choose Courses</label>
-                    <select asp-for="CourseId" class="form-control" asp-items="@( new SelectList(Model.Courses, "CourseId","Material"))"></select>
-                    <span asp-validation-for="CourseId" class="text-danger"></span>
-                </div>*@
-
-
-
 
             <ul class="list-unstyled">
 
-                <li>Courses: </li>
+                <li class="list-group-horizontal-lg">Courses: </li>
+                
 
                 @foreach (var item in Model.Courses)
                 {
-                    <li>
-                        <label for="@Model.CourseId"></label>
-                        <input type="Checkbox" name="CourseIds" value="@item.CourseId" /> @Html.DisplayFor(modelItem => item.Material)
+                    <li class="list-group-item">
+                        <label  for="@Model.CourseId"></label>
+                        <input class="form-check-input" type="Checkbox" name="CourseIds" value="@item.CourseId" /> @Html.DisplayFor(modelItem => item.Material)
 
                         <span asp-validation-for="CourseId" class="text-danger"></span>
                     </li>
@@ -67,7 +60,7 @@
 
 
             </ul>
-
+            <br />
 
             <div class="form-group">
                 <input type="submit" value="Assign" class="btn btn-primary" />

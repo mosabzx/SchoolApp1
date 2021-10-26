@@ -13,6 +13,6 @@ namespace SchoolApp.ViewModels
         public List<Student> Students { get; set; }
         public int CourseId { get; set; }
         public List<Course> Courses  { get; set; }
-        public List<StudentCourse> StudentCourses { get; set; }
+
     }
 }

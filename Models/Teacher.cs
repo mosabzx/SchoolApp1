@@ -8,6 +8,7 @@ namespace SchoolApp.Models
     {
         //[Key]
         public int TeacherId { get; set; }
+        [Required]
         public string TeacherName { get; set; }
 
         public int CourseId { get; set; }
