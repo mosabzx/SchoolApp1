@@ -6,9 +6,9 @@
 
 }
 @*@if (ViewBag.Conflict != null)
-{
+    {
 
-}*@
+    }*@
 
 <h1>Assign To Courses</h1>
 
@@ -45,16 +45,22 @@
             <ul class="list-unstyled">
 
                 <li class="list-group-horizontal-lg">Courses: </li>
-                
+
 
                 @foreach (var item in Model.Courses)
                 {
-                    <li class="list-group-item">
-                        <label  for="@Model.CourseId"></label>
-                        <input class="form-check-input" type="Checkbox" name="CourseIds" value="@item.CourseId" /> @Html.DisplayFor(modelItem => item.Material)
+                    @if (item.CourseId != -1)
+                    {
+                        <li class="list-group-item">
+                            <label for="@Model.CourseId"></label>
 
-                        <span asp-validation-for="CourseId" class="text-danger"></span>
-                    </li>
+                            <input class="form-check-input" type="Checkbox" name="CourseIds" value="@item.CourseId" /> @Html.DisplayFor(modelItem => item.Material)
+
+                            <span asp-validation-for="CourseId" class="text-danger"></span>
+                        </li>
+
+                    }
+
 
                 }
 

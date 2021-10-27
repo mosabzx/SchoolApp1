@@ -1,6 +1,3 @@
-# SchoolApp1
-
-A school app assignment for  Entity Framework, Code first approach
 
 # Entity Framework
 A school app assignment for  Entity Framework, Code first approach.
