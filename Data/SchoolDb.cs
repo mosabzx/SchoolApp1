@@ -49,10 +49,7 @@ namespace SchoolApp.Data
                 .WithMany(s => s.StudentCourses)
                 .HasForeignKey(sc => sc.CourseId);
 
-            //modelBuilder.Entity<TeacherCourseVM>().HasNoKey();
-            //modelBuilder.Entity<AssignmentCourseVM>().HasNoKey();
-            //modelBuilder.Entity<StudentCourseVM>().HasNoKey();
-
+          
             modelBuilder.Entity<Course>().HasData(
                 new Course { CourseId = -1, Material = "----Select Course----" },
                 new Course { CourseId = 1, Material = "Programming" },
@@ -66,8 +63,11 @@ namespace SchoolApp.Data
 
             modelBuilder.Entity<Assignment>().HasData(
                new Assignment { AssignmentId = 1, Title = "C#", CourseId = 1 },
+               new Assignment { AssignmentId = 1, Title = "JavaScript", CourseId = 1 },
                new Assignment { AssignmentId = 2, Title = "Story", CourseId = 2 },
-               new Assignment { AssignmentId = 3, Title = "Operations", CourseId = 3 });
+               new Assignment { AssignmentId = 1, Title = "Cover Letter", CourseId = 2 },
+               new Assignment { AssignmentId = 1, Title = "Addition", CourseId = 3 },
+               new Assignment { AssignmentId = 3, Title = "multiplication", CourseId = 3 });
 
             modelBuilder.Entity<Teacher>().HasData(
                new Teacher { TeacherId = 1, TeacherName = "Alfred", CourseId = 1 },
@@ -76,6 +76,7 @@ namespace SchoolApp.Data
 
             modelBuilder.Entity<StudentCourse>().HasData(
                 new StudentCourse { CourseId = 3, StudentId = 2 },
+                new StudentCourse { CourseId = 3, StudentId = 1 },
                 new StudentCourse { CourseId = 1, StudentId = 1 },
                 new StudentCourse { CourseId = 3, StudentId = 3 },
                 new StudentCourse { CourseId = 2, StudentId = 1 });
