@@ -1,3 +1,4 @@
+
 # Entity Framework
 A school app assignment for  Entity Framework, Code first approach.
 
