@@ -63,11 +63,11 @@ namespace SchoolApp.Data
 
             modelBuilder.Entity<Assignment>().HasData(
                new Assignment { AssignmentId = 1, Title = "C#", CourseId = 1 },
-               new Assignment { AssignmentId = 1, Title = "JavaScript", CourseId = 1 },
-               new Assignment { AssignmentId = 2, Title = "Story", CourseId = 2 },
-               new Assignment { AssignmentId = 1, Title = "Cover Letter", CourseId = 2 },
-               new Assignment { AssignmentId = 1, Title = "Addition", CourseId = 3 },
-               new Assignment { AssignmentId = 3, Title = "multiplication", CourseId = 3 });
+               new Assignment { AssignmentId = 2, Title = "JavaScript", CourseId = 1 },
+               new Assignment { AssignmentId = 3, Title = "Story", CourseId = 2 },
+               new Assignment { AssignmentId = 4, Title = "Cover Letter", CourseId = 2 },
+               new Assignment { AssignmentId = 5, Title = "Addition", CourseId = 3 },
+               new Assignment { AssignmentId = 6, Title = "multiplication", CourseId = 3 });
 
             modelBuilder.Entity<Teacher>().HasData(
                new Teacher { TeacherId = 1, TeacherName = "Alfred", CourseId = 1 },
