@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-               Course Id's   @*@Html.DisplayNameFor(model => model.CourseId)*@
+                Course Id's   @*@Html.DisplayNameFor(model => model.CourseId)*@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Material)
@@ -21,20 +21,25 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CourseId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Material)
-            </td>
-            <td>
-                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.CourseId">Edit</a> |
-                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.CourseId">Details</a> |
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CourseId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            @if (item.CourseId != -1)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Material)
+                    </td>
+                    <td>
+                        <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.CourseId">Edit</a> |
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.CourseId">Details</a> |
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CourseId">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        }
     </tbody>
 </table>
