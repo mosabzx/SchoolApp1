@@ -6,7 +6,7 @@ namespace SchoolApp.Models
 {
     public class Teacher
     {
-        //[Key]
+        
         public int TeacherId { get; set; }
         [Required]
         public string TeacherName { get; set; }

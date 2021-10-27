@@ -7,7 +7,7 @@ namespace SchoolApp.Models
     public class Course
     {
 
-        //[Key]
+        
         public int CourseId { get; set; }
         [Required]
         public string Material { get; set; }

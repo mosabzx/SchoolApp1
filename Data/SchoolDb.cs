@@ -49,7 +49,7 @@ namespace SchoolApp.Data
                 .WithMany(s => s.StudentCourses)
                 .HasForeignKey(sc => sc.CourseId);
 
-          
+
             modelBuilder.Entity<Course>().HasData(
                 new Course { CourseId = -1, Material = "----Select Course----" },
                 new Course { CourseId = 1, Material = "Programming" },
@@ -83,16 +83,6 @@ namespace SchoolApp.Data
 
 
         }
-
-
-        //public DbSet<SchoolApp.ViewModels.TeacherCourseVM> TeacherCourseVM { get; set; }
-
-
-        //public DbSet<SchoolApp.ViewModels.AssignmentCourseVM> AssignmentCourseVM { get; set; }
-
-
-        //public DbSet<SchoolApp.ViewModels.StudentCourseVM> StudentCourseVM { get; set; }
-
 
 
 
